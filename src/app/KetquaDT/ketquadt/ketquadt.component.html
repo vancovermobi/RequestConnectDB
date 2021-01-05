@@ -1,0 +1,134 @@
+<div class="KQDT"  style="margin-left: 10px; margin-right: 20px" >
+    <Label> SỐ TBMT :&nbsp;
+      <input id="input" placeholder="nhập sô thông báo mời thầu" [(ngModel)] = "SOTBMT" 
+                (keyup)="getStatus(SOTBMT);"    />
+    </Label>&nbsp;
+    <button id="btn_so" class="btn btn-primary btn-sm" (click)="getSOTBMT(SOTBMT)">Search SỐ TBMT</button>
+    <br><br>
+    <Label> Path Url :&nbsp;
+      <input id="input_url" placeholder="nhập đường dẫn Url" [(ngModel)] = "pathUrl" 
+              (keyup)="getStatus(pathUrl);"       />
+    </Label>&nbsp;
+    <button id="btn_url" class="btn btn-primary btn-sm" (click)="getPathUrl(pathUrl)" type="button" >Search Url</button>
+  </div>
+  <br>  
+  <!-- Hiển thị kết quả  (click)="SaveDataBase(TTCHUDAUTU , MOTASP)" [TTCHUDAUTU , MOTASP]-->
+  <div style="margin-left: 10px; margin-right: 20px" class="Display">
+    <form #KQDTForm="ngForm"  >
+      <div class="SaveDB ">
+        <label for="inputcheckbox">Checkin to Save to DataBase :
+          <input type="checkbox" name="inputcheckbox" id="inputcheckbox" #inputcheckbox (keyup)="0" [(ngModel)]="isChecked">
+        </label>&nbsp;
+        <button type="submit" [disabled]="!isChecked" class="btn btn-warning form-control"  >upDataBase</button>
+      </div>
+     
+      <p>{{ status }}</p>
+  <div>
+  <table 
+    id="table" class="table table-bordered table-sm table-hover table-responsive-sm form-group"
+    *ngFor="let item of TableInfo" >
+        <tr class="tr-hover" >
+          <th style="width: 200px;color:white;" class="bg-primary"  scope="row">SỐ TBMT : </th>
+          <td  onmouseover="style='color:red';'padding: 0.5em 0.5em 0.5em 0.5em';" onmouseleave="style='padding: 0.5em';'color:darkblue';"
+                class="SOTBMT" style="padding: 0.5em ; color:darkblue; text-align: left;" scope="row"  type="button"
+                (click)="getChuDauTu(item.SOTBMT.slice(0,11));"          
+          >{{ item.SOTBMT }}</td>  
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary"  scope="row">CHỦ ĐẦU TƯ : </th>
+          <td class="CHUDAUTU" style="padding: 10px ;" scope="row"  
+              name="CHUDAUTU" #CHUDAUTU [(ngModel)]="item.CHUDAUTU !='' ? item.CHUDAUTU : TTCHUDAUTU"
+          >{{ item.CHUDAUTU !='' ? item.CHUDAUTU : TTCHUDAUTU }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary"  scope="row">HÌNH THỨC ĐẤU THẦU : </th>
+          <td class="HINHTHUCDT" style="padding: 10px ;" scope="row"            
+          >{{ item.HINHTHUCDT +'' }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary"  scope="row">TÊN GÓI THẦU : </th>
+          <td class="TENGOITHAU" style="padding: 10px ;" scope="row"            
+          >{{ item.TENGOITHAU }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary"  scope="row">GIÁ GÓI THẦU : </th>
+          <td class="GIAGOITHAU" style="padding: 10px ;" scope="row"             
+          >{{ item.GIAGOITHAU }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary" scope="row">THỜI GIAN ĐÓNG THẦU : </th>
+          <td class="THOIGIANDT" style="padding: 10px ;" scope="row"            
+          >{{ item.THOIGIANDT }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary" scope="row">TÊN NHÀ THẦU : </th>
+          <td class="TENNHATHAU" style="padding: 10px ;" scope="row"             
+          >{{ item.TENNHATHAU }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary" scope="row">SỐ ĐKKD : </th>
+          <td style="padding: 10px ;" scope="row" class="SODKKD"        
+           >{{ item.SODKKD }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary" scope="row">GIÁ DỰ THẦU : </th>
+          <td class="GIADUTHAU" style="padding: 10px ;" scope="row"
+          >{{ item.GIADUTHAU }}</td>
+        </tr>
+        <tr>
+          <th style="width: 200px;color:white;" class="bg-primary" scope="row">THỜI GIAN THỰC HIỆN : </th>
+          <td style="padding: 10px ;" scope="row" class="TGTH"
+          >{{ item.TGTH }}</td>
+        </tr>
+  </table>
+  </div>
+  <!-- Hiển thị Thông tin chi tiết  -->
+  <div >
+  <table
+    id="table" class="table table-bordered table-sm table-hover table-responsive-sm ">
+    <thead class="thead-dark" style="color:white;">
+      <tr class="bg-primary">
+        <th class="STT" scope="col">STT</th>
+        <th class="TENSP" scope="col">Tên hàng hóa</th>
+        <th class="KHSP" scope="col">Ký hiệu mã SP</th>
+        <th class="KL" scope="col">Khối lượng</th>
+        <th class="DVT" scope="col">ĐVT</th>
+        <th class="MOTASP" scope="col">Mô tả hàng hóa</th>
+        <th class="XUATXU" scope="col">Xuất xứ</th>
+        <th class="DONGIA" scope="col">Đơn giá</th>
+        <th class="NOTE" scope="col">Ghi chú</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr   *ngFor="let item of TableContent; let i = index" >
+        <th class="STT" scope="row">{{ item.STT }}</th>
+        <td class="TENSP">{{ item.TENSP }}</td>
+        <td  class="KHSP">{{ item.KHSP  }}</td>
+        <td class="KL">{{ item.KL }}</td>
+        <td class="DVT" >{{ item.DVT }}</td>
+        <td class="MOTASP">
+          <textarea class="MOTA" name="MOTA" #MOTA [(ngModel)]="TableContent[i].MOTA" [value]="item.MOTA">{{ item.MOTA }}</textarea>
+        </td>
+        <td class="XUATXU">{{ item.XUATXU }}</td>
+        <td class="DONGIA">{{ item.DONGIA }} đ</td>
+        <td class="NOTE">{{ item.NOTE }}</td>
+      </tr>
+     </tbody>
+  </table>
+  </div>
+  </form>
+  </div>
+  <div>
+    <ul *ngFor="let p of TableInfoSaveDB " >
+      <li>{{ p.SOTBMT }}</li>
+      <li>{{ p.CHUDAUTU }}</li>
+      <li>{{ p.HINHTHUCDT }}</li>
+      <li>{{ p.TENGOITHAU }}</li>
+      <li>{{ p.GIAGOITHAU }}</li>
+      <li>{{ p.THOIGIANDT }}</li>
+      <li>{{ p.TENNHATHAU }}</li>
+      <li>{{ p.SODKKD }}</li>
+      <li>{{ p.GIADUTHAU }}</li>
+      <li>{{ p.TGTH }}</li>
+    </ul>
+  </div>

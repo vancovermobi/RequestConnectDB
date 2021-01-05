@@ -1,1 +1,74 @@
+<div class="row">
+    <div class="col-md-8">
+            <h1 class="logo">
+                <a target="_blank" href="assets/hinh/ctydl.png">
+                    <img src="assets/hinh/ctydl.png" alt="ctydl">
+                </a>
+            </h1>
+            <h1>
+                <a  href="assets/hinh/dtonline2.png">
+                    <img src="assets/hinh/dtonline2.jpg" style="width: 400px;height: 60px;">
+                </a>
+            </h1>
+            <p style="margin-top: 3.8em;">
+                <span >
+                    <strong style="font-size: 20px;color: #be6013">HỆ THỐNG MẠNG ĐẤU THẦU QUỐC GIA</strong>
+                </span> 
+            </p>
+    </div>
+    <div class="col-md-4">
+            <div class="">
+                <div class=" text-right">
+                    <div class="top-page-meta">
+                        <p style="margin-top: 0.7em;">
+                            <span id="timer">21:37:07</span>
+                            <span id="date">Chủ Nhật, 03/01/2021</span>
+                        </p>
+                       
+                        <script>
+                            var d = new Date(1609678051000);
+                            var days = ['Chủ Nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy']
+                            setInterval(function () {
+                                d.setSeconds(d.getSeconds() + 1);
+                                $('#timer').text((d.getHours() + ':' + checkTime(d.getMinutes()) + ':' + checkTime(d.getSeconds())));
+                                $('#date').text((days[d.getDay()] + ', ' + checkTime(d.getDate()) + '/' + checkTime(d.getMonth() + 1) + '/' + d.getFullYear()));
+                            }, 1000);
+                        </script>
+                        <p>
+                            <a class="btn btn-primary" onclick="setTitle(true);" href="#" data-toggle="modal" data-target="#alertRegLogin">Đăng ký</a>
+                            <a class="btn btn-primary" onclick="setTitle(false);" href="#" data-toggle="modal" data-target="#alertRegLogin">Đăng nhập</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div>
+    <ul class="nav nav-pills" >
+        <li class="nav-item"><a >TRANG CHỦ </a></li>
+        <li class="nav-item"><a >THÔNG BÁO MỜI THẦU</a></li>
+        <li class="nav-item"><a >KẾT QUẢ ĐẤU THẦU</a></li>
+        <li class="nav-item"><a >ADMIN_DB</a></li>
+        <li class="nav-item"><a >TÌM KIẾM</a></li>
+    </ul>
+    <!-- <ul class="nav nav-pills" >
+        <li class="nav-item"><a class="nav-link" routerLink="/" >TRANG CHỦ</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/home" >THÔNG BÁO MỜI THẦU</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/body" >KẾT QUẢ ĐẤU THẦU</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/employees" >ADMIN_DB</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/employees" >TÌM KIẾM</a></li>
+        <li *ngIf="!isloggedin" class="nav-item"><a class="nav-link" routerLink="/login" >Login</a></li>
+        <li *ngIf="isloggedin" class="nav-item" ><a class="nav-link" (click)="LogOut()" routerLink="/home"  >LogOut</a></li>
+    </ul> -->
+</div>
+<!-- <div>
+<router-outlet></router-outlet>
 <app-request-db></app-request-db>
+</div> -->
+<footer>
+    <div class="row" >
+        <div class="col-lg-12" >
+            <p>Copyright &copy; Your Website 2021</p>
+        </div>
+    </div>   
+</footer>
